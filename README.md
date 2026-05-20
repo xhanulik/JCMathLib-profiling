@@ -8,6 +8,8 @@ JCMathLib is an open-source library for the JavaCard platform that aims to enabl
 unavailable in the standard JavaCard API. In particular, it focuses on providing efficient modular arithmetic and
 elliptic curve operations.
 
+This version is modified into profiling-friendly version.
+
 If you want to get into the technical details of JCMathLib, you can find them in this
 paper: https://arxiv.org/abs/1810.01662.
 
