@@ -15,6 +15,7 @@ public class OperationSupport {
     public static final short GD60 = 0x0004;        // G+D Sm@rtcafe 6.0
     public static final short GD70 = 0x0005;        // G+D Sm@rtcafe 7.0
     public static final short SECORA = 0x0006;      // Infineon Secora ID S
+    public static final short DEFAULT = 0x0007;      // Default card, no HW support
 
     public short MIN_RSA_BIT_LENGTH = 512;
     public boolean DEFERRED_INITIALIZATION = false;
@@ -97,6 +98,16 @@ public class OperationSupport {
                 RSA_APPEND_MOD = true;
                 EC_HW_XY = true;
                 EC_PRECISE_BITLENGTH = false;
+                break;
+            case DEFAULT:
+                RSA_EXP = false;
+                RSA_SQ = false;
+                RSA_PUB = false;
+                RSA_RESIZE_MOD = false;
+                EC_HW_X = false;
+                EC_PRECISE_BITLENGTH = false;
+                EC_GEN = false;
+                EC_HW_X_ECDSA = false;
                 break;
             default:
                 break;

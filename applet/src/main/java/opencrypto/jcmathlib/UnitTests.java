@@ -17,7 +17,7 @@ import javacard.security.CryptoException;
  * @author Vasilios Mavroudis and Petr Svenda and Antonin Dufka
  */
 public class UnitTests extends Applet {
-    public final static short CARD_TYPE = OperationSupport.SIMULATOR; // TODO set your card
+    public final static short CARD_TYPE = OperationSupport.DEFAULT; // TODO set your card
 
     public final static byte CLA_OC_UT = (byte) 0xB0;
     public final static byte INS_CLEANUP = (byte) 0x03;
