@@ -100,6 +100,7 @@ public class OperationSupport {
                 EC_PRECISE_BITLENGTH = false;
                 break;
             case DEFAULT:
+                DEFERRED_INITIALIZATION = true;
                 RSA_EXP = false;
                 RSA_SQ = false;
                 RSA_PUB = false;

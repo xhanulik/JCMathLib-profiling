@@ -118,44 +118,6 @@ public class ResourceManager {
         THREE.setValue((byte) 3);
         ONE_COORD = new BigNat(MAX_COORD_SIZE, JCSystem.MEMORY_TYPE_PERSISTENT, this);
         ONE_COORD.setValue((byte) 1);
-        // ECC Helpers
-        if (OperationSupport.getInstance().EC_HW_XY) {
-            // ecMultKA = KeyAgreement.getInstance(KeyAgreement.ALG_EC_SVDP_DH_PLAIN_XY, false);
-            ecMultKA = KeyAgreement.getInstance((byte) 6, false);
-        } else if (OperationSupport.getInstance().EC_HW_X) {
-            // ecMultKA = KeyAgreement.getInstance(KeyAgreement.ALG_EC_SVDP_DH_PLAIN, false);
-            ecMultKA = KeyAgreement.getInstance((byte) 3, false);
-        }
-        // verifyEcdsa = Signature.getInstance(Signature.ALG_ECDSA_SHA_256, false);
-        verifyEcdsa = Signature.getInstance((byte) 33, false);
-        if (OperationSupport.getInstance().EC_HW_ADD) {
-            // ecAddKA = KeyAgreement.getInstance(KeyAgreement.ALG_EC_PACE_GM, false);
-            ecAddKA = KeyAgreement.getInstance((byte) 5, false);
-        }
-
-        // RSA Sq Helpers
-        if (OperationSupport.getInstance().RSA_SQ) {
-            Util.arrayFillNonAtomic(ARRAY_A, (short) 0, MAX_SQ_LENGTH, (byte) 0xff);
-            sqCiph = Cipher.getInstance(Cipher.ALG_RSA_NOPAD, false);
-            modSqCiph = Cipher.getInstance(Cipher.ALG_RSA_NOPAD, false);
-            if (OperationSupport.getInstance().RSA_PUB) {
-                modSqPub = (RSAPublicKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PUBLIC, MAX_EXP_BIT_LENGTH, false);
-                sqPub = (RSAPublicKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PUBLIC, MAX_SQ_BIT_LENGTH, false);
-                sqPub.setExponent(CONST_TWO, (short) 0, (short) CONST_TWO.length);
-                sqPub.setModulus(ARRAY_A, (short) 0, MAX_SQ_LENGTH);
-                sqCiph.init(sqPub, Cipher.MODE_ENCRYPT);
-            } else {
-                modSqPriv = (RSAPrivateKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PRIVATE, MAX_EXP_BIT_LENGTH, false);
-                sqPriv = (RSAPrivateKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PRIVATE, MAX_SQ_BIT_LENGTH, false);
-                sqPriv.setExponent(CONST_TWO, (short) 0, (short) CONST_TWO.length);
-                sqPriv.setModulus(ARRAY_A, (short) 0, MAX_SQ_LENGTH);
-                sqCiph.init(sqPriv, Cipher.MODE_DECRYPT);
-            }
-        }
-
-        // RSA Exp Helpers
-        expPub = (RSAPublicKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PUBLIC, MAX_EXP_BIT_LENGTH, false);
-        expPriv = (RSAPrivateKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PRIVATE, MAX_EXP_BIT_LENGTH, false);
         expCiph = Cipher.getInstance(Cipher.ALG_RSA_NOPAD, false);
 
         rng = RandomData.getInstance(RandomData.ALG_SECURE_RANDOM);
